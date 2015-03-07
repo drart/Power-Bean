@@ -3,6 +3,8 @@
 
 void setup()
 {
+    Bean.setBeanName("PowerBean");
+
     Serial.begin(57600); 
     Serial.setTimeout(25);
     pinMode(POWERPIN, INPUT_PULLUP);
