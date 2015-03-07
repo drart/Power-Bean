@@ -20,9 +20,43 @@
 #import "C4Workspace.h"
 
 @implementation C4WorkSpace
+{
+    C4Switch *aSwitch;
+    C4Label *aText;
+    C4Label *beanName;
+    C4Image *lightblue;
+}
 
--(void)setup {
-    //work your magic here
+-(void)setup
+{
+    aText = [C4Label labelWithText:@"Bean Power"];
+    [aText sizeToFit];
+    CGPoint p = CGPointMake(self.canvas.center.x, self.canvas.center.y - 100);
+    aText.center = p;
+    
+    lightblue = [C4Image imageNamed:@"lightblue.png"];
+    lightblue.center = self.canvas.center;
+    [lightblue setOrigin:CGPointMake(0, 50)];
+    [lightblue setWidth:50.0f];
+    [lightblue setAlpha:0.2f];
+    
+    aSwitch = [C4Switch switch];
+    aSwitch.center = self.canvas.center;
+    [aSwitch runMethod:@"switchOnOff:" target:self forEvent:VALUECHANGED];
+    
+    [self.canvas addControl:lightblue];
+    [self.canvas addControl:aText];
+    [self.canvas addControl:aSwitch];
+
+}
+
+-(void)switchOnOff:(C4Switch *)sender {
+    if (sender.isOn) {
+        C4Log(@"lllallala");
+    }
+    else {
+        C4Log(@"loolooo");
+    }
 }
 
 @end

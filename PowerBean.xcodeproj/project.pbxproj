@@ -19,6 +19,7 @@
 		6D01850D1AAB8258004045AB /* PowerBean-Prefix.pch in Resources */ = {isa = PBXBuildFile; fileRef = 6D01850C1AAB8258004045AB /* PowerBean-Prefix.pch */; };
 		6D0185101AAB8258004045AB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D01850E1AAB8258004045AB /* LaunchScreen.xib */; };
 		6D01851C1AAB8258004045AB /* PowerBeanTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D01851B1AAB8258004045AB /* PowerBeanTests.m */; };
+		6D0185261AAB890D004045AB /* lightblue.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0185251AAB890D004045AB /* lightblue.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +88,7 @@
 		6D0185151AAB8258004045AB /* PowerBeanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PowerBeanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D01851A1AAB8258004045AB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D01851B1AAB8258004045AB /* PowerBeanTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PowerBeanTests.m; sourceTree = "<group>"; };
+		6D0185251AAB890D004045AB /* lightblue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lightblue.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 		6D0184CD1AAB8258004045AB /* PowerBean */ = {
 			isa = PBXGroup;
 			children = (
+				6D0185251AAB890D004045AB /* lightblue.png */,
 				6D0185041AAB8258004045AB /* C4WorkSpace.h */,
 				6D0185051AAB8258004045AB /* C4WorkSpace.m */,
 				6D0185071AAB8258004045AB /* Main.storyboard */,
@@ -305,6 +308,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D0185261AAB890D004045AB /* lightblue.png in Resources */,
 				6D0185011AAB8258004045AB /* inception.mov in Resources */,
 				6D01850B1AAB8258004045AB /* Images.xcassets in Resources */,
 				6D0184D41AAB8258004045AB /* Media.xcassets in Resources */,
