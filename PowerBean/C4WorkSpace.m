@@ -58,7 +58,7 @@
     [self.canvas addControl:lightblue];
     [self.canvas addControl:aText];
     [self.canvas addControl:aSwitch];
-
+    
 }
 
 -(void)switchOnOff:(C4Switch *)sender
@@ -75,18 +75,31 @@
 
 #pragma mark -- Bean Management
 
+- (void)beanManagerDidUpdateState:(PTDBeanManager *)manager{
+    if(self.beanManager.state == BeanManagerState_PoweredOn){
+        [self.beanManager startScanningForBeans_error:nil];
+    }
+    else if (self.beanManager.state == BeanManagerState_PoweredOff) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Turn on bluetooth to continue" delegate:nil cancelButtonTitle:nil otherButtonTitles:@"Ok", nil];
+        [alert show];
+        return;
+    }
+}
+
 - (void)BeanManager:(PTDBeanManager*)beanManager didDiscoverBean:(PTDBean*)thebean error:(NSError*)error
 {
     NSString *bname = thebean.name;
-    C4Log(thebean.name);
+    //C4Log(@"%@ %@",bname, [thebean.RSSI stringValue] );
     
     if ([bname isEqualToString:@"PowerBean"]) {
         NSError *err; 
         [self.beanManager connectToBean:thebean error:&err];
-        C4Log(@"%@",self.bean.RSSI);
         self.bean = thebean;
+        
         [lightblue setAlpha:1.0f];
         [aSwitch setUserInteractionEnabled:YES];
+        
+        //C4Log(@"%@", [self.bean.RSSI stringValue]);
     }
 }
 
@@ -98,6 +111,25 @@
         [lightblue setAlpha:0.2f];
         [aSwitch setUserInteractionEnabled:NO];
     }
+}
+
+///http://stackoverflow.com/questions/10324596/detect-when-home-button-is-pressed-ios
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 
