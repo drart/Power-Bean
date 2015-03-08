@@ -18,6 +18,9 @@
 // IN THE SOFTWARE.
 
 #import "C4CanvasController.h"
+#import <PTDBeanManager.h>
 
 @interface C4WorkSpace : C4CanvasController
+@property (nonatomic, strong) PTDBean *bean;
+@property (nonatomic, strong) PTDBeanManager *beanManager;
 @end
