@@ -36,8 +36,8 @@
     self.beanManager = [[PTDBeanManager alloc] initWithDelegate:self];
     self.beanManager.delegate = self;
     
-    poweron  = [NSData dataWithBytes:(unsigned char []){0xEA,0x01} length:2];
-    poweroff = [NSData dataWithBytes:(unsigned char []){0xEA,0x00} length:2];
+    poweron  = [NSData dataWithBytes:(unsigned char []){234,1} length:2];
+    poweroff = [NSData dataWithBytes:(unsigned char []){234,0} length:2];
     
     aText = [C4Label labelWithText:@"Bean Power"];
     [aText sizeToFit];
@@ -64,11 +64,11 @@
 -(void)switchOnOff:(C4Switch *)sender
 {
     if (sender.isOn) {
-        C4Log(@"lllallala");
+        //C4Log(@"lllallala");
         [self.bean sendSerialData:poweron];
     }
     else {
-        C4Log(@"loolooo");
+        //C4Log(@"loolooo");
         [self.bean sendSerialData:poweroff];
     }
 }
@@ -89,17 +89,15 @@
 - (void)BeanManager:(PTDBeanManager*)beanManager didDiscoverBean:(PTDBean*)thebean error:(NSError*)error
 {
     NSString *bname = thebean.name;
-    //C4Log(@"%@ %@",bname, [thebean.RSSI stringValue] );
     
-    if ([bname isEqualToString:@"PowerBean"]) {
+    if ([bname isEqualToString:@"PowerBean"])
+    {
         NSError *err; 
         [self.beanManager connectToBean:thebean error:&err];
         self.bean = thebean;
         
         [lightblue setAlpha:1.0f];
         [aSwitch setUserInteractionEnabled:YES];
-        
-        //C4Log(@"%@", [self.bean.RSSI stringValue]);
     }
 }
 
@@ -114,22 +112,32 @@
 }
 
 ///http://stackoverflow.com/questions/10324596/detect-when-home-button-is-pressed-ios
-
+/// Maybe relinqusih connection to Bean when app goes away?
+// UIApplicationWillResignActiveNotification
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+    
+    [self.beanManager disconnectBean:self.bean error:nil];
+    C4Log(@"fadfadfad");
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
+    [self.beanManager disconnectBean:self.bean error:nil];
+    C4Log(@"fadfadfad");
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+
+    [self.beanManager disconnectBean:self.bean error:nil];
+    C4Log(@"fadfadfad");
 }
 
 

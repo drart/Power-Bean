@@ -1,5 +1,6 @@
 // the pin controlling the relay
 #define POWERPIN 0
+#define POWERCHAR 234
 
 void setup()
 {
@@ -20,17 +21,35 @@ void loop()
     
   if( length > 0 )
   {
-    if(buffer[0] == 234)
+    if(buffer[0] == POWERCHAR)
     {
       byte val = buffer[1];
       val = (val > 0) ? HIGH : LOW; 
       digitalWrite(POWERPIN, val);
       
       // little bit of visual feedback for sanity
-      Bean.setLed( 255, 0, 0 );
+      if (val == HIGH)
+        Bean.setLed( 0, 255, 0 );
+      else 
+        Bean.setLed( 255, 0, 0 );
       delay( 500 );
       Bean.setLed( 0, 0, 0 );
     }
+    else
+    {
+      // little bit of visual feedback for sanity
+      Bean.setLed( 255, 0, 0 );
+      delay( 250 );
+      Bean.setLed( 0, 0, 0 );
+      delay( 250 );
+      Bean.setLed( 255, 0, 0 );
+      delay( 250 );
+      Bean.setLed( 0, 0, 0 );
+      
+      Serial.write((uint8_t*)buffer, length);
+
+    }
+    Serial.print(length);
   }
    
   Bean.sleep(0xFFFFFFFF); 
