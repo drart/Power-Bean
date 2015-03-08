@@ -36,8 +36,8 @@
     self.beanManager = [[PTDBeanManager alloc] initWithDelegate:self];
     self.beanManager.delegate = self;
     
-    poweron  = [NSData dataWithBytes:(unsigned char []){234,1} length:2];
-    poweroff = [NSData dataWithBytes:(unsigned char []){234,0} length:2];
+    poweron  = [NSData dataWithBytes:(unsigned char []){50,1} length:2];
+    poweroff = [NSData dataWithBytes:(unsigned char []){50,0} length:2];
     
     aText = [C4Label labelWithText:@"Bean Power"];
     [aText sizeToFit];

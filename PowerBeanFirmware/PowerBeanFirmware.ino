@@ -1,6 +1,6 @@
 // the pin controlling the relay
 #define POWERPIN 0
-#define POWERCHAR 15
+#define POWERCHAR 50
 
 void setup()
 {
