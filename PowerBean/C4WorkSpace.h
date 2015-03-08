@@ -20,7 +20,8 @@
 #import "C4CanvasController.h"
 #import <PTDBeanManager.h>
 
-@interface C4WorkSpace : C4CanvasController
+@interface C4WorkSpace : C4CanvasController <PTDBeanManagerDelegate, PTDBeanDelegate>
 @property (nonatomic, strong) PTDBean *bean;
+@property (nonatomic, strong) NSMutableDictionary *beans;
 @property (nonatomic, strong) PTDBeanManager *beanManager;
 @end

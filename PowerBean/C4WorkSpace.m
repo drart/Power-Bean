@@ -25,10 +25,20 @@
     C4Label *aText;
     C4Label *beanName;
     C4Image *lightblue;
+    NSData *poweron;
+    NSData *poweroff;
 }
 
 -(void)setup
 {
+    
+    self.beans = [NSMutableDictionary dictionary];
+    self.beanManager = [[PTDBeanManager alloc] initWithDelegate:self];
+    self.beanManager.delegate = self;
+    
+    poweron  = [NSData dataWithBytes:(unsigned char []){0xEA,0x01} length:2];
+    poweroff = [NSData dataWithBytes:(unsigned char []){0xEA,0x00} length:2];
+    
     aText = [C4Label labelWithText:@"Bean Power"];
     [aText sizeToFit];
     CGPoint p = CGPointMake(self.canvas.center.x, self.canvas.center.y - 100);
@@ -43,6 +53,7 @@
     aSwitch = [C4Switch switch];
     aSwitch.center = self.canvas.center;
     [aSwitch runMethod:@"switchOnOff:" target:self forEvent:VALUECHANGED];
+    [aSwitch setUserInteractionEnabled:NO];
     
     [self.canvas addControl:lightblue];
     [self.canvas addControl:aText];
@@ -50,13 +61,44 @@
 
 }
 
--(void)switchOnOff:(C4Switch *)sender {
+-(void)switchOnOff:(C4Switch *)sender
+{
     if (sender.isOn) {
         C4Log(@"lllallala");
+        [self.bean sendSerialData:poweron];
     }
     else {
         C4Log(@"loolooo");
+        [self.bean sendSerialData:poweroff];
     }
 }
+
+#pragma mark -- Bean Management
+
+- (void)BeanManager:(PTDBeanManager*)beanManager didDiscoverBean:(PTDBean*)thebean error:(NSError*)error
+{
+    NSString *bname = thebean.name;
+    C4Log(thebean.name);
+    
+    if ([bname isEqualToString:@"PowerBean"]) {
+        NSError *err; 
+        [self.beanManager connectToBean:thebean error:&err];
+        C4Log(@"%@",self.bean.RSSI);
+        self.bean = thebean;
+        [lightblue setAlpha:1.0f];
+        [aSwitch setUserInteractionEnabled:YES];
+    }
+}
+
+
+- (void)BeanManager:(PTDBeanManager*)beanManager didDisconnectBean:(PTDBean*)thebean error:(NSError*)error
+{
+    if (self.bean == thebean)
+    {
+        [lightblue setAlpha:0.2f];
+        [aSwitch setUserInteractionEnabled:NO];
+    }
+}
+
 
 @end
