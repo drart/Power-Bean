@@ -7,6 +7,14 @@ The iOS app is built using `C4 <http://www.c4ios.com/>`_, a great framework for 
 
 The original idea was to be able to power cycle my router when it went choked or to turn it off when I left the house. 
 
+Getting Rolling
+---------------
+
+Requires `cocoapods <http://cocoapods.org/`_.
+
+.. code
+    pod install
+
 Bean Setup
 ----------
 
