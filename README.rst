@@ -14,7 +14,7 @@ Bean Setup
 * Connect D0 of Bean to IN+ on Powerswitch Tail
 * Upload PowerBeanFirmware to the Bean 
 
-.. image PowerSwitchTail.jpg?raw=true
+.. image https://raw.githubusercontent.com/drart/Power-Bean/master/img/PowerSwitchTail.jpg
 
 Issues
 ------
