@@ -10,10 +10,10 @@ The original idea was to be able to power cycle my router when it went choked or
 Getting Rolling
 ---------------
 
-Requires `cocoapods <http://cocoapods.org/`_.
+Requires `cocoapods <http://cocoapods.org/>`_.
 
-.. code
-    pod install
+.. code-block :: bash
+    $ pod install
 
 Bean Setup
 ----------
@@ -22,7 +22,7 @@ Bean Setup
 * Connect D0 of Bean to IN+ on Powerswitch Tail
 * Upload PowerBeanFirmware to the Bean 
 
-.. image https://raw.githubusercontent.com/drart/Power-Bean/master/img/PowerSwitchTail.jpg
+.. image::  https://raw.githubusercontent.com/drart/Power-Bean/master/img/PowerSwitchTail.jpg
 
 Issues
 ------
