@@ -7,13 +7,21 @@ The iOS app is built using `C4 <http://www.c4ios.com/>`_, a great framework for 
 
 The original idea was to be able to power cycle my router when it went choked or to turn it off when I left the house. 
 
+The app searches for a Bean named 'PowerBean' and once it connects then the user interface becomes accessible. The lightblue logo dims and brightens upon connect and disconnect.
+
+.. image::  https://raw.githubusercontent.com/drart/Power-Bean/master/img/PowerBeanScreenshot.jpg
+
 Getting Rolling
 ---------------
 
 Requires `cocoapods <http://cocoapods.org/>`_.
 
-.. code-block :: bash
+.. code-block:: bash
+
     $ pod install
+
+Open the **PowerBean.xcworkspace** not the **PowerBean.xcodeproj**.
+
 
 Bean Setup
 ----------
@@ -38,7 +46,9 @@ Links
 TODO
 ----
 * http://stackoverflow.com/questions/8990310/animate-spinner-when-loading-new-page 
+* Upon connect poll bean for its state and update the UI accordingly
 * Disconnect Bean when app loses focus
 * Reconnect Bean when app comes back into focus
+* Dim the switch or make invisible when the Bean disconnected
 * Fix the visual layout a bit more to make it easier to deal with connection issues
 * Hack Bean to use USB cable like `this <https://punchthrough.com/bean/examples/mood-light/>`_
